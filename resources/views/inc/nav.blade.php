@@ -73,29 +73,12 @@
       <nav
         class="items-center justify-center hidden space-x-8 text-sm font-medium lg:flex lg:flex-1 lg:w-0"
       >
-            <a class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out" href="">Books</a>
-            <!-- This example requires Tailwind CSS v2.0+ -->
-            <div class="relative inline-block text-left">
-                <div>
-                    <button type="button" class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out" id="genres-dropdown" aria-expanded="true" aria-haspopup="true">
-                        Genres
-                        <div class="ml-1">
-                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
-                        </div>
-                    </button>
-                </div>
-
-                <!--div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="genres-dropdown" tabindex="-1">
-                    <div class="py-1" role="none">
-                        <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Drama</a>
-                        <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Romance</a>
-                        <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">Actions</a>
-                    </div>
-                </div-->
-            </div>
-
+            <a class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700
+                     hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300
+                     transition duration-150 ease-in-out" href="">Books</a>
+            <a class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700
+                      hover:border-gray-300 focus:outline-none focus:text-gray-700
+                      focus:border-gray-300 transition duration-150 ease-in-out" href="">Genres</a>
       </nav>
 
       <div class="items-center hidden space-x-4 lg:flex">
@@ -126,3 +109,5 @@
       </nav>
     </div>
   </header>
+
+

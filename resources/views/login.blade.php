@@ -30,7 +30,7 @@
 
         <!-- Image Section -->
         <div class="w-1/2 shadow-2xl">
-            <img class="object-cover w-full h-screen hidden md:block" src="/imgs/bg.jpg"">
+            <img class="object-cover w-full h-screen hidden md:block" src="/imgs/book.jpg"">
         </div>
     </div>
 

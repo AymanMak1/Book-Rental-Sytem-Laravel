@@ -11,7 +11,7 @@ class Book extends Model
 
     public function borrows() {
         return $this->hasMany(Borrow::class, 'book_id');
-      }
+    }
 
     public function activeBorrows() {
         return $this->getAllBorrows()->where('status', '=', 'ACCEPTED');
