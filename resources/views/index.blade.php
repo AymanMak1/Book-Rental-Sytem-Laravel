@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('layouts.app')
 <!--lg:h-screen-->
 @section('content')
 <section class="bg-gray-50">
@@ -14,35 +14,36 @@
         <p class="mt-4 sm:leading-relaxed sm:text-xl">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. <br> Nesciunt illo tenetur fuga ducimus numquam ea!
         </p>
-
+        @guest
         <div class="flex mt-8">
           <a class="block w-full px-12 py-3 text-sm font-medium text-white bg-red-600 rounded shadow sm:w-auto active:bg-red-500 hover:bg-red-700 focus:outline-none focus:ring"
              href="{{ route ('register') }}">
             Join Us
           </a>
         </div>
+        @endguest
 
       </div>
     </div>
     <div class="max-w-screen-xl px-4 py-4 mx-auto">
-            <div class="grid gap-4 grid-cols-4 grid-rows-1">
+            <div class="grid gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4">
                 <div id="jh-stats-positive" class="flex flex-col justify-center px-4 py-4 bg-white  rounded drop-shadow-lg">
                     <div>
-                        <p class="text-3xl font-semibold text-center text-gray-800">82</p>
+                        <p class="text-3xl font-semibold text-center text-gray-800">{{ count($users) }}</p>
                         <p class="text-lg text-center text-gray-500">Users</p>
                     </div>
                 </div>
 
                 <div id="jh-stats-negative" class="flex flex-col justify-center px-4 py-4 mt-4 bg-white rounded sm:mt-0 drop-shadow-lg">
                     <div>
-                        <p class="text-3xl font-semibold text-center text-gray-800">26</p>
+                        <p class="text-3xl font-semibold text-center text-gray-800">{{count($genres)}}</p>
                         <p class="text-lg text-center text-gray-500">Genres</p>
                     </div>
                 </div>
 
                 <div id="jh-stats-neutral" class="flex flex-col justify-center px-4 py-4 mt-4 bg-white rounded sm:mt-0 drop-shadow-lg">
                     <div>
-                        <p class="text-3xl font-semibold text-center text-gray-800">386</p>
+                        <p class="text-3xl font-semibold text-center text-gray-800">{{count($books)}}</p>
                         <p class="text-lg text-center text-gray-500">Books</p>
                     </div>
                 </div>

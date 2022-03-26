@@ -13,6 +13,8 @@ class BookController extends Controller
         return view('books.list', [
             'books' => $books
         ]);
-
+    }
+    public function show(){
+        return view('books.show');
     }
 }

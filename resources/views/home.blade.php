@@ -1,6 +1,7 @@
 <x-app-layout>
-<x-slot name="header">
+    <x-slot name="header">
 </x-slot>
+@section('content')
 <section class="bg-gray-50">
     <div class="max-w-screen-xl px-4 pt-32 pb-8 mx-auto lg:items-center lg:flex">
       <div class="text-left">
@@ -51,5 +52,7 @@
 
 </section>
 
+@endsection
 
 </x-app-layout>
+
