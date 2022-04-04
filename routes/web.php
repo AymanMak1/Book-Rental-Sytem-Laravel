@@ -1,18 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MainController;
-use App\Http\Controllers\GenreController;
-use App\Http\Controllers\BookController;
+use App\Http\Controllers\PagesController;
+use App\Http\Controllers\GenresController;
+use App\Http\Controllers\BooksController;
 
-Route::get('/', [MainController::class, 'index'])->name('main');
-Route::get('/genres',[GenreController::class, 'list'])->name('genres.list');
-Route::get('/books',[BookController::class, 'list'])->name('books.list');
-Route::get('/books/book',[BookController::class, 'show'])->name('books.show');
-Route::get('/home', [MainController::class, 'index'])->middleware(['auth'])->name('home');
-/*Route::get('/home', function () {
-    return view('home');
-})->middleware(['auth'])->name('home');*/
-
+Route::get('/', [PagesController::class, 'index'])->name('main');
+Route::resource('/books',BooksController::class);
+Route::resource('/genres',GenresController::class);
+Route::get('/home', [PagesController::class, 'index'])->middleware(['auth'])->name('home');
 require __DIR__.'/auth.php';
 

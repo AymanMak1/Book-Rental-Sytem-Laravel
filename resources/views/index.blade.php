@@ -15,12 +15,12 @@
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. <br> Nesciunt illo tenetur fuga ducimus numquam ea!
         </p>
         @guest
-        <div class="flex mt-8">
-          <a class="block w-full px-12 py-3 text-sm font-medium text-white bg-red-600 rounded shadow sm:w-auto active:bg-red-500 hover:bg-red-700 focus:outline-none focus:ring"
-             href="{{ route ('register') }}">
-            Join Us
-          </a>
-        </div>
+            <div class="flex mt-8">
+            <a class="block w-full px-12 py-3 text-sm font-medium text-white bg-red-600 rounded shadow sm:w-auto active:bg-red-500 hover:bg-red-700 focus:outline-none focus:ring"
+                href="{{ route ('register') }}">
+                Join Us
+            </a>
+            </div>
         @endguest
 
       </div>

@@ -47,7 +47,9 @@
             <nav
             class="items-center justify-center hidden space-x-8 text-sm font-medium lg:flex lg:flex-1 lg:w-0"
           >
-                <a class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out" href="">Books</a>
+                <a class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300
+                focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
+                href="/books">Books</a>
                 <!-- This example requires Tailwind CSS v2.0+ -->
                 <div class="relative inline-block text-left">
                     <div>
@@ -74,7 +76,7 @@
                                 class="px-5 py-2 text-sm font-medium text-gray-600 bg-gray-100 rounded-lg"
                                 href="{{route ('login')}}"
                             >
-                                Log in
+                                {{__('Login')}}
                             </a>
                         @endif
 
@@ -83,7 +85,7 @@
                             class="px-5 py-2 text-sm font-medium text-white bg-red-600 rounded-lg"
                             href="{{route ('register')}}"
                             >
-                            Sign up
+                                {{__('Register')}}
                             </a>
                         @endif
                 </div>

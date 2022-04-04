@@ -7,7 +7,7 @@ use App\Models\Genre;
 use App\Models\Book;
 use App\Models\User;
 
-class MainController extends Controller
+class PagesController extends Controller
 {
     //
     public function index()
