@@ -47,11 +47,12 @@ class BooksController extends Controller
             'isbn'=>'required|regex:/^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$/i',
             'in_stock'=>'required|min:0'
         ]);
+        $newImageName = NULL;
+        if($request->cover_image != NULL){
+            $newImageName = uniqid() . '-' . SlugService::createSlug(Book::class,'slug',$request->title) . '.' . $request->cover_image->extension();
+            $request->cover_image->move(public_path('imgs/books'), $newImageName);
+        }
 
-
-        $newImageName = uniqid() . '-' . SlugService::createSlug(Book::class,'slug',$request->title) . '.' . $request->cover_image->extension();
-
-        $request->cover_image->move(public_path('imgs/books'), $newImageName);
 
 
         Book::create([
@@ -74,6 +75,8 @@ class BooksController extends Controller
 
     public function show($slug)
     {
+        //$book = Book::find($id);
+        //var_dump($book->genres);
         return view('books.show')->with('book',Book::where('slug', $slug)->first());
 
     }

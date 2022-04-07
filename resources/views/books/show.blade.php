@@ -19,7 +19,11 @@
                     <tr class="font-extrabold">
                         <td class="text-gray-400 pb-2">Genre</td>
                         <td class="pb-2">:
-                            <span class="text-amber-400">Psychology</span>
+                            @foreach ($book->genres as $genre )
+                            <span class="px-2 {{$genre['style']}}">
+                                {{$genre['name'] }}
+                            </span>&nbsp;
+                            @endforeach
                         </td>
                     </tr>
                     <tr class="font-extrabold">

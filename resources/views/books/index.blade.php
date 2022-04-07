@@ -47,10 +47,10 @@
                 <div class="flex justify-evenly mt-2">
                     @if (Auth::check() &&  Auth::user()->is_librarian === 1)
                         <a href="{{route('books.edit',$book->slug)}}" class="text-cyan-500 italic hover:text-gray-900 pb-2 ">Edit</a>
-                        <form action="{{route('books.destroy',$book->slug)}}" >
+                        <form action="{{route('books.destroy',$book->slug)}} " method="POST">
                             @csrf
                             @method('delete')
-                            <button class="text-red-500 pr-3 hover:text-gray-900" type="submit">
+                            <button class="text-red-500 pr-3" type="submit">
                                 Delete
                             </button>
                         </form>

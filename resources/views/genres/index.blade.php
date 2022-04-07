@@ -28,7 +28,7 @@
                 <div class="mt-2 flex justify-evenly">
                     @if (Auth::check() &&  Auth::user()->is_librarian === 1)
                         <a href="{{route('genres.edit',$genre->slug)}}" class="inline text-cyan-500 italic hover:text-gray-900 pb-2 ">Edit</a>
-                        <form action="{{route('genres.destroy',$genre->slug)}}" class="inline">
+                        <form action="{{route('genres.destroy',$genre->slug)}}" method="POST">
                             @csrf
                             @method('delete')
                             <button class="text-red-500 pr-3" type="submit">
