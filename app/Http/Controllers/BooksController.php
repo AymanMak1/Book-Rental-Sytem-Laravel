@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Genre;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class BooksController extends Controller
@@ -26,8 +27,10 @@ class BooksController extends Controller
 
     public function create()
     {
-
-        return view('books.create');
+        $genres = Genre::all();
+        return view('books.create', [
+            'genres' => $genres
+        ]);
     }
 
 
@@ -45,9 +48,11 @@ class BooksController extends Controller
             'in_stock'=>'required|min:0'
         ]);
 
+
         $newImageName = uniqid() . '-' . SlugService::createSlug(Book::class,'slug',$request->title) . '.' . $request->cover_image->extension();
 
         $request->cover_image->move(public_path('imgs/books'), $newImageName);
+
 
         Book::create([
             'title' => $request->input('title'),
@@ -62,14 +67,15 @@ class BooksController extends Controller
             'in_stock'=> $request->input('in_stock')
         ]);
 
-        dd($request);
-        #return redirect('/books')->with('message','The book has been added successfully !');
+
+        return redirect('/books')->with('message','The book has been added successfully !');
     }
 
 
     public function show($slug)
     {
         return view('books.show')->with('book',Book::where('slug', $slug)->first());
+
     }
 
 
@@ -86,7 +92,6 @@ class BooksController extends Controller
             'author'=>'required|max:255',
             'released_at'=>'required|before:now',
             'description'=>'nullable',
-            'cover_image' => 'mimes:jpg,png,jpeg|max:5048',
             'language_code'=>'nullable',
             'pages'=>'required|min:0    ',
             'isbn'=>'required|regex:/^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$/i',
@@ -99,7 +104,6 @@ class BooksController extends Controller
             'author' => $request->input('author'),
             'description' => $request->input('description'),
             'released_at'=>$request->input('released_at'),
-            'cover_image' => $request->input('cover_image'),
             'language_code' => $request->input('language_code'),
             'pages' => $request->input('pages'),
             'isbn'=> $request->input('isbn'),
@@ -116,4 +120,5 @@ class BooksController extends Controller
 
         return redirect('/books')->with('message','The book has been deleted!');
     }
+
 }

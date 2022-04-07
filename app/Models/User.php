@@ -29,6 +29,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
     public function readerBorrows() {
         return $this->hasMany(Borrow::class, 'reader_id');
     }

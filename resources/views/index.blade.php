@@ -5,9 +5,9 @@
     <div class="max-w-screen-xl px-4 pt-32 pb-8 mx-auto lg:items-center lg:flex">
       <div class="text-left">
         <h1 class="text-3xl font-extrabold sm:text-5xl">
-          Understand User Flow. <br>
+            Borrow Your Favorite Book<br>
           <strong class="font-extrabold text-red-700 sm:block">
-            Increase Conversion.
+            At BRS Library.
           </strong>
         </h1>
 
@@ -15,13 +15,40 @@
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. <br> Nesciunt illo tenetur fuga ducimus numquam ea!
         </p>
         @guest
-            <div class="flex mt-8">
-            <a class="block w-full px-12 py-3 text-sm font-medium text-white bg-red-600 rounded shadow sm:w-auto active:bg-red-500 hover:bg-red-700 focus:outline-none focus:ring"
-                href="{{ route ('register') }}">
-                Join Us
-            </a>
+            <div class="flex mt-8 mb-3">
+                <a class="w-full px-12 py-3 text-sm font-medium text-white bg-red-600 rounded shadow sm:w-auto active:bg-red-500 hover:bg-red-700 focus:outline-none focus:ring"
+                    href="{{ route ('register') }}">
+                    Join Us
+                </a>
             </div>
         @endguest
+
+        @if (count($genres) > 0)
+            <div class="">
+                    <div class="mt-8 mb-3 xl:w-96">
+                      <select class="form-select appearance-none
+                        block
+                        w-full
+                        px-3
+                        py-1.5
+                        text-base
+                        font-normal
+                        text-gray-700
+                        bg-white bg-clip-padding bg-no-repeat
+                        border border-solid border-gray-300
+                        rounded
+                        transition
+                        ease-in-out
+                        m-0
+                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                            <option selected>List books by genre</option>
+                            @foreach($genres as $genre)
+                                <option value="{{ $genre['name']}}">{{ $genre['name']}}</option>
+                            @endforeach
+                      </select>
+                    </div>
+                  </div>
+        @endif
 
       </div>
     </div>

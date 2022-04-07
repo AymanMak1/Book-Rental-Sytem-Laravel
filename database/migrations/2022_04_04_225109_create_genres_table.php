@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('genres', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('style',['bg-sky-500', 'bg-neutral-500', 'bg-green-500', 'bg-red-700',
+            $table->string('slug',255);
+            $table->enum('style',['bg-sky-500', 'bg-neutral-500', 'bg-green-500', 'bg-red-600',
                                   'bg-amber-400', 'bg-cyan-600', 'bg-slate-200', 'bg-neutral-900']);
             $table->timestamps();
         });

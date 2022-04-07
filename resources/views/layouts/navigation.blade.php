@@ -17,7 +17,7 @@
                         @csrf
                         <div class="relative">
                           <input
-                            class="h-10 pr-10 text-sm placeholder-gray-300 border-gray-200 rounded-lg focus:z-10"
+                            class="h-10 pr-10 text-sm placeholder-gray-300 border-gray-200 rounded-lg focus:z-1 xl:w-96"
                             placeholder="Search books by Author/Title"
                             type="text"
                           />
@@ -50,20 +50,9 @@
                 <a class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300
                 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
                 href="/books">Books</a>
-                <!-- This example requires Tailwind CSS v2.0+ -->
-                <div class="relative inline-block text-left">
-                    <div>
-                        <button type="button" class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out" id="genres-dropdown" aria-expanded="true" aria-haspopup="true">
-                            Genres
-                            <div class="ml-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </div>
-
-                </div>
+                <a class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300
+                focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
+                href="/genres">Genres</a>
 
           </nav>
 

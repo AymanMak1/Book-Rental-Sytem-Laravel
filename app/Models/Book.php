@@ -24,6 +24,10 @@ class Book extends Model
         return $this->getAllBorrows()->where('status', '=', 'ACCEPTED');
     }
 
+    public function genres(){
+        return $this->hasMany(Genre::class, 'book_genre');
+    }
+
     public function sluggable(): array
     {
         return [

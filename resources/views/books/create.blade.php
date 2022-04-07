@@ -21,7 +21,7 @@
             </div>
           </div>
           <div class="mt-5 md:mt-0 md:col-span-2">
-            <form action="/books" method="POST" enctype="multipart/form-data">
+            <form action="{{route('books.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
               <div class="shadow overflow-hidden sm:rounded-md">
                 <div class="px-4 py-5 bg-white sm:p-6">
@@ -38,9 +38,24 @@
 
                     <div class="col-span-6">
                         <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                        <textarea name="description" id="description"  value="{{ old('description') }}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" rows="5">
+                        <textarea name="description" id="description" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" rows="5">
+                            {{ old('description') }}
                         </textarea>
                     </div>
+                    @if (count($genres) > 0)
+                        <div class="col-span-6">
+                            <span class="block text-sm font-medium text-gray-700">Genre : </span>
+                            <div class="flex flex-wrap">
+                                @foreach($genres as $genre)
+                                    <div class="form-check form-check-inline text-sm mt-2 mr-4">
+                                        <input type="checkbox" id="{{$genre['name']}}" name="book_genres[]" value="{{$genre['id']}}" />
+                                        <label for="{{$genre['name']}}" class="ml-2">{{$genre['name']}}</;> &nbsp;&nbsp;
+                                    </div>
+                                @endforeach
+
+                            </div>
+                        </div>
+                    @endif
 
                     <div class="col-span-6">
                       <label for="released_at" class="block text-sm font-medium text-gray-700">Date of Release</label>

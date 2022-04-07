@@ -12,4 +12,5 @@ class UserController extends Controller
         dd($users);
         return view('index',["users"=> $users]);
     }
+
 }
