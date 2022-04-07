@@ -63,7 +63,6 @@
             No Books Found
         @endif
 
-
     </div>
 </div>
 @endsection

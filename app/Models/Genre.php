@@ -18,10 +18,6 @@ class Genre extends Model
     protected $styles = ['bg-sky-500', 'bg-neutral-500', 'bg-green-500', 'bg-red-600',
                               'bg-amber-400', 'bg-cyan-600', 'bg-slate-200', 'bg-neutral-900'];
 
-    public function books() {
-        return $this->hasMany(Book::class, 'book_genre');
-    }
-
     public function sluggable(): array
     {
         return [
@@ -29,5 +25,9 @@ class Genre extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function books() {
+        return $this->belongsToMany(Book::class, 'book_genre','book_id','genre_id');
     }
 }

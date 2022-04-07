@@ -19,7 +19,7 @@
         @if (count($genres) > 0)
             @foreach($genres as $genre)
              <div>
-                <div class="font-extrabold text-lg text-center text-white {{$genre['style']}} mt-8 p-4 rounded-lg hover:drop-shadow-lg cursor-pointer">
+                <div class="font-extrabold text-lg text-center {{ ($genre['style']=="bg-slate-200") ? "text-neutral-900" : "text-white" }}  {{$genre['style']}}  mt-8 p-4 rounded-lg hover:drop-shadow-lg cursor-pointer">
                     <a href="">
                         {{ $genre['name']}}
                     </a>
@@ -44,6 +44,8 @@
         @else
             No Genres Found
         @endif
+
+
     </div>
 </div>
 @endsection

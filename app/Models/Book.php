@@ -25,7 +25,7 @@ class Book extends Model
     }
 
     public function genres(){
-        return $this->hasMany(Genre::class, 'book_genre');
+        return $this->belongsToMany(Genre::class, 'book_genre');
     }
 
     public function sluggable(): array
