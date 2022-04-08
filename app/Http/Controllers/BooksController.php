@@ -18,10 +18,15 @@ class BooksController extends Controller
     }
     public function index()
     {
-        $books = Book::all();
-        return view('books.index', [
-            'books' => $books
-        ]);
+       $search =request()->query('search');
+       if($search){
+            $books = Book::where('title','LIKE','%'.$search.'%')->get();
+            return view('books.index',compact('books'));
+       }
+       $books = Book::all();
+       return view('books.index', [
+           'books' => $books
+       ]);
     }
 
 
@@ -122,6 +127,14 @@ class BooksController extends Controller
         $book->delete();
 
         return redirect('/books')->with('message','The book has been deleted!');
+    }
+
+    public function search(){
+        /*$search_text = $_GET['query'];
+        $books = Book::where('title','LIKE','%'.$search_text.'%')->get();
+
+        return view('books.index',compact('books'));*/
+
     }
 
 }

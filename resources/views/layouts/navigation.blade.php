@@ -13,12 +13,12 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex flex items-center space-x-4">
-                    <form class="hidden mb-0 lg:flex">
-                        @csrf
+                    <form class="hidden mb-0 lg:flex" method="GET" action="{{route('books.index')}}">
                         <div class="relative">
                           <input
                             class="h-10 pr-10 text-sm placeholder-gray-300 border-gray-200 rounded-lg focus:z-1 xl:w-96"
                             placeholder="Search books by Author/Title"
+                            name="search"
                             type="text"
                           />
 
