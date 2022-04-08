@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Laravel\Scout\Searchable;
+//use Laravel\Scout\Searchable;
 
 class Book extends Model
 {
     use HasFactory;
     use Sluggable;
     use SoftDeletes;
-    use Searchable;
+    //use Searchable;
     #slug
     protected $fillable = ['title', 'author','description','released_at',
                             'cover_image','language_code','pages','isbn','in_stock'];

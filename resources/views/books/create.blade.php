@@ -15,9 +15,11 @@
                       @foreach ($errors->all() as $error)
                         <li class="text-red-700">{{$error}}</li>
                       @endforeach
-
                   </ul>
               @endif
+              @if (session()->has('constraintError'))
+              <span class="text-red-700"> {{session()->get('constraintError')}}</span>
+             @endif
             </div>
           </div>
           <div class="mt-5 md:mt-0 md:col-span-2">
