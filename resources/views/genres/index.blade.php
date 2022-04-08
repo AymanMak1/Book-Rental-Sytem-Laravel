@@ -19,11 +19,13 @@
         @if (count($genres) > 0)
             @foreach($genres as $genre)
              <div>
-                <div class="font-extrabold text-lg text-center {{ ($genre['style']=="bg-slate-200") ? "text-neutral-900" : "text-white" }}  {{$genre['style']}}  mt-8 p-4 rounded-lg hover:drop-shadow-lg cursor-pointer">
-                    <a href="">
-                        {{ $genre['name']}}
+
+                    <a href="{{route('genres.show',$genre->slug)}}">
+                        <div class="font-extrabold text-lg text-center {{ ($genre['style']=="bg-slate-200") ? "text-neutral-900" : "text-white" }}  {{$genre['style']}}  mt-8 p-4 rounded-lg hover:drop-shadow-lg cursor-pointer">
+                            {{ $genre['name']}}
+                        </div>
                     </a>
-                </div>
+
 
                 <div class="mt-2 flex justify-evenly">
                     @if (Auth::check() &&  Auth::user()->is_librarian === 1)

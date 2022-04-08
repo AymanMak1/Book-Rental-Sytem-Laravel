@@ -44,9 +44,9 @@ class GenresController extends Controller
     }
 
 
-    public function show($id)
+    public function show($slug)
     {
-        //
+        return view('genres.show')->with('genre',Genre::where('slug',$slug)->first());
     }
 
     public function edit($slug)
