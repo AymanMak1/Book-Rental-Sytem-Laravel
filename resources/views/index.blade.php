@@ -40,10 +40,12 @@
                         transition
                         ease-in-out
                         m-0
-                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" onchange="location = this.value;" aria-label="Default select example">
                             <option selected>List books by genre</option>
                             @foreach($genres as $genre)
-                                <option value="{{ $genre['name']}}">{{ $genre['name']}}</option>
+                                <option value="{{route('genres.show',$genre->slug)}}">
+                                   {{ $genre['name']}}
+                                </option>
                             @endforeach
                       </select>
                     </div>
