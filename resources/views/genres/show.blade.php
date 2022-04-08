@@ -28,7 +28,7 @@
             @foreach ($genre->books as $book)
 
             <div class="mt-8">
-                <a href="books/{{ $book->slug }}">
+                <a href="{{route('books.show',$book->slug)}}">
                     @if ($book->cover_image != NULL)
                         <img src={{ asset('/imgs/books/'.$book->cover_image) }} class="hover:brightness-50 ease-in duration-300" alt="{{$book->slug}}">
                     @else
@@ -36,7 +36,7 @@
                     @endif
                 </a>
                 <div class="mt-2">
-                    <a href="books/{{ $book->slug }}" class="text-lg mt-2 hover:text-gray:300">{{ $book['title'] }}</a>
+                    <a href="{{route('books.show',$book->slug)}}" class="text-lg mt-2 hover:text-gray:300">{{ $book['title'] }}</a>
                     <div class="flex item-center text-gray-400">
                         <span class="font-extrabold">By {{$book['author']}} <span class="mx-2"> | </span> {{$book['released_at']}}</span>
                     </div>
