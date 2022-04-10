@@ -14,9 +14,9 @@ class BookSeeder extends Seeder
     public function run()
     {
         DB::table('books')->truncate();
-        Book::factory()->count(10)->create();
+        Book::factory()->count(12)->create();
         foreach(Book::all() as $book){
-            $genres = DB::table('genres')->take(rand(1,10))->pluck('id');
+            $genres = DB::table('genres')->take(rand(1,8))->pluck('id');
             $book->genres()->attach($genres);
         }
     }

@@ -14,6 +14,10 @@ class GenreSeeder extends Seeder
     public function run()
     {
         DB::table('genres')->truncate();
-        Genre::factory()->count(10)->create();
+        Genre::factory()->count(8)->create();
+        foreach(Genre::all() as $genre){
+            $books = DB::table('books')->take(rand(1,10))->pluck('id');
+            $genre->books()->attach($books);
+        }
     }
 }

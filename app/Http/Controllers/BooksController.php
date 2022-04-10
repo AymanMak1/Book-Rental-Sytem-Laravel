@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Genre;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\DB;
 
 class BooksController extends Controller
 {
@@ -61,7 +62,7 @@ class BooksController extends Controller
             $request->cover_image->move(public_path('imgs/books'), $newImageName);
         }
 
-        Book::create([
+        $book = Book::create([
             'title' => $request->input('title'),
             'slug' => SlugService::createSlug(Book::class,'slug',$request->title),
             'author' => $request->input('author'),
@@ -74,6 +75,8 @@ class BooksController extends Controller
             'in_stock'=> $request->input('in_stock')
         ]);
 
+        $genresIds = $request->input('book_genres');
+        $book->genres()->attach($genresIds);
 
         return redirect('/books')->with('message','The book has been added successfully !');
     }
@@ -83,7 +86,7 @@ class BooksController extends Controller
     {
         //$book = Book::find($id);
         //var_dump($book->genres);
-        return view('books.show')->with('book',Book::where('slug', $slug));
+        return view('books.show')->with('book',Book::where('slug', $slug)->first());
 
     }
 
