@@ -41,7 +41,7 @@ class BorrowsController extends Controller
             'book_id' => $request->input('book_id'),
             'status' => $status
         ]);
-        return redirect('/books'.'/'.$request->input('book_slug'));
+        return redirect('/books'.'/'.$request->input('book_slug'))->with('message','Your rental request has been submitted');;
     }
 
     public function show($id)

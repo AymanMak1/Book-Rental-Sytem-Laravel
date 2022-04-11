@@ -3,6 +3,13 @@
 @section('content')
 <div class="max-w-screen-xl px-4 pb-8 mx-auto">
     <div class="book-details border-b  border-gray-800">
+        @if (session()->has('message'))
+            <div class="pt-12">
+                <p class="mb-4 text-gray-50 bg-green-500 rouded-2xl py-4 px-6">
+                    {{session()->get('message')}}
+                </p>
+            </div>
+        @endif
         <div class="container mx-auto px-4 py-16 flex flex-col md:flex-row">
             @if ($book->cover_image != NULL)
                 <img src={{ asset('/imgs/books/'.$book->cover_image) }} class="w-96" alt="{{$book->slug}}">
