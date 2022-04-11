@@ -49,10 +49,15 @@
           >
                 <a class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300
                 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
-                href="/books">Books</a>
+                href="{{route('books.index')}}">Books</a>
                 <a class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300
                 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
-                href="/genres">Genres</a>
+                href="{{route('genres.index')}}">Genres</a>
+                @if (Auth::check() &&  Auth::user()->is_librarian === 0)
+                    <a class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300
+                    focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
+                    href="{{route('rentals.index')}}">My Rentals</a>
+                @endif
 
           </nav>
 

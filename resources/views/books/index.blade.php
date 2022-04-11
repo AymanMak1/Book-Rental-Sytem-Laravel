@@ -14,7 +14,7 @@
         @endif
         @if (Auth::check() &&  Auth::user()->is_librarian === 1)
             <div class="pt-12">
-                <a href="books/create"
+                <a href="{{route('books.create')}}"
                 class="bg-green-500 uppercase px-5 text-white
                         text-xs font-extrabold py-3 rounded-3xl">
                     Add a Book

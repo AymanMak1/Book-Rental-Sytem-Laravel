@@ -56,6 +56,23 @@
                             {{ $book->description }}
                         </td>
                     </tr>
+                    @if (Auth::check() &&  Auth::user()->is_librarian === 0)
+                    <tr>
+                        <td>
+                            <br>
+                            <form action="{{ route('rentals.store')}}" method="POST">
+                                    @csrf
+                                    <input type='hidden' name='reader_id' value='{{Auth::id()}}'>
+                                    <input type='hidden' name='book_id' value='{{$book->id}}'>
+                                    <button type="submit" name="borrow_cta"
+                                        class="bg-green-500 uppercase px-5 text-white
+                                                text-xs font-extrabold py-3 rounded-3xl">
+                                            Borrow this book
+                                    </button>
+                            </form>
+                            </td>
+                    </tr>
+                    @endif
                 </table>
 
             </div>

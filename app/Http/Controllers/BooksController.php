@@ -7,6 +7,7 @@ use App\Models\Book;
 use App\Models\Genre;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class BooksController extends Controller
 {
@@ -87,7 +88,6 @@ class BooksController extends Controller
         //$book = Book::find($id);
         //var_dump($book->genres);
         return view('books.show')->with('book',Book::where('slug', $slug)->first());
-
     }
 
 
@@ -133,11 +133,9 @@ class BooksController extends Controller
         return redirect('/books')->with('message','The book has been deleted!');
     }
 
-    public function search(){
-        /*$search_text = $_GET['query'];
-        $books = Book::where('title','LIKE','%'.$search_text.'%')->get();
-
-        return view('books.index',compact('books'));*/
+    public function rentals()
+    {
+        return view('books.rentals');
 
     }
 
