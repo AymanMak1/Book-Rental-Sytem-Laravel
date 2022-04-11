@@ -64,6 +64,7 @@
                                     @csrf
                                     <input type='hidden' name='reader_id' value='{{Auth::id()}}'>
                                     <input type='hidden' name='book_id' value='{{$book->id}}'>
+                                    <input type='hidden' name='book_slug' value='{{$book->slug}}'>
                                     <button type="submit" name="borrow_cta"
                                         class="bg-green-500 uppercase px-5 text-white
                                                 text-xs font-extrabold py-3 rounded-3xl">

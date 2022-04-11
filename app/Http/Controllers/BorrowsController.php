@@ -5,19 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Borrow;
+use App\Models\User;
+use App\Models\Book;
+use Illuminate\Support\Facades\DB;
 
 class BorrowsController extends Controller
 {
 
     public function index()
     {
-        return view('rentals.index');
+        $myrentals = DB::table('borrows')
+                        ->join('books','borrows.book_id','=','books.id')
+                        ->join('users','borrows.reader_id','=','users.id')
+                        ->where('borrows.reader_id','=',Auth::id())
+                        ->get();
+
+        //dd($myrentals);
+        return view('rentals.index', [
+            'myrentals' => $myrentals
+        ]);
     }
 
 
     public function create()
     {
-        //return view('rentals.index');
 
     }
 
@@ -30,7 +41,7 @@ class BorrowsController extends Controller
             'book_id' => $request->input('book_id'),
             'status' => $status
         ]);
-        return redirect('/books')->with('message','The rental request has been submitted successfully!');
+        return redirect('/books'.'/'.$request->input('book_slug'));
     }
 
     public function show($id)
