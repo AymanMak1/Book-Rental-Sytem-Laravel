@@ -17,24 +17,18 @@ class GenresController extends Controller
         ]);
     }
 
-
     public function create()
     {
         return view('genres.create');
     }
 
-
     public function store(GenreFormRequest $request)
     {
-        $request->validated();
-        Genre::create([
-            'name' => $request->input('name'),
-            'slug' => SlugService::createSlug(Genre::class,'slug',$request->name),
-            'style' => $request->input('style'),
-        ]);
+        $validate_data = $request->validated();
+        $validate_data['slug'] = SlugService::createSlug(Genre::class,'slug',$request->name);
+        Genre::create($validate_data);
         return redirect('/genres')->with('message','The genre has been added successfully !');
     }
-
 
     public function show($slug)
     {
@@ -48,12 +42,9 @@ class GenresController extends Controller
 
     public function update(GenreFormRequest $request, $slug)
     {
-        $request->validated();
-        Genre::where('slug',$slug)->update([
-            'name' => $request->input('name'),
-            'slug' => SlugService::createSlug(Genre::class,'slug',$request->name),
-            'style' => $request->input('style'),
-        ]);
+        $validate_data = $request->validated();
+        $validate_data['slug'] = SlugService::createSlug(Genre::class,'slug',$request->name);
+        Genre::where('slug',$slug)->update($validate_data);
         return redirect('/genres')->with('message','The genre has been updated successfully !');
     }
 

@@ -19,8 +19,7 @@ class BooksController extends Controller
             'show'
         ]]);
     }
-    public function index()
-    {
+    public function index(){
        $search =request()->query('search');
 
        if($search){
@@ -36,91 +35,50 @@ class BooksController extends Controller
        ]);
     }
 
-
-    public function create()
-    {
+    public function create(){
         $genres = Genre::all();
         return view('books.create', [
             'genres' => $genres
         ]);
     }
 
-
-    public function store(BookFormRequest $request)
-    {
-        $request->validated();
-
+    public function store(BookFormRequest $request){
+        $validate_data = $request->validated();
+        $validate_data['slug'] = SlugService::createSlug(Book::class,'slug',$request->title);
         $newImageName = NULL;
         if($request->cover_image != NULL){
             $newImageName = uniqid() . '-' . SlugService::createSlug(Book::class,'slug',$request->title) . '.' . $request->cover_image->extension();
             $request->cover_image->move(public_path('imgs/books'), $newImageName);
         }
-
-        $book = Book::create([
-            'title' => $request->input('title'),
-            'slug' => SlugService::createSlug(Book::class,'slug',$request->title),
-            'author' => $request->input('author'),
-            'description' => $request->input('description'),
-            'released_at'=>$request->input('released_at'),
-            'cover_image' => $newImageName,
-            'language_code' => $request->input('language_code'),
-            'pages' => $request->input('pages'),
-            'isbn'=> $request->input('isbn'),
-            'in_stock'=> $request->input('in_stock')
-        ]);
-
+        $validate_data['cover_image'] = $newImageName;
+        $book = Book::create($validate_data);
         $genresIds = $request->input('book_genres');
         $book->genres()->attach($genresIds);
-
         return redirect('/books')->with('message','The book has been added successfully !');
     }
 
-
-    public function show($slug)
-    {
-        //$book = Book::find($id);
-        //var_dump($book->genres);
+    public function show($slug){
         return view('books.show')->with('book',Book::where('slug', $slug)->first());
     }
 
-
-    public function edit($slug)
-    {
+    public function edit($slug){
         return view('books.edit')->with('book',Book::where('slug',$slug)->first());
     }
 
-
-    public function update(BookFormRequest $request, $slug)
-    {
-        $request->validated();
-
-        Book::where('slug',$slug)->update([
-            'title' => $request->input('title'),
-            'slug' => SlugService::createSlug(Book::class,'slug',$request->title),
-            'author' => $request->input('author'),
-            'description' => $request->input('description'),
-            'released_at'=>$request->input('released_at'),
-            'language_code' => $request->input('language_code'),
-            'pages' => $request->input('pages'),
-            'isbn'=> $request->input('isbn'),
-            'in_stock'=> $request->input('in_stock')
-        ]);
+    public function update(BookFormRequest $request, $slug){
+        $validate_data = $request->validated();
+        $validate_data['slug'] = SlugService::createSlug(Book::class,'slug',$request->title);
+        Book::where('slug',$slug)->update();
         return redirect('/books')->with('message','the book has been updated successfully!');
     }
 
-
-    public function destroy($slug)
-    {
+    public function destroy($slug){
         $book = Book::where('slug',$slug);
         $book->delete();
-
         return redirect('/books')->with('message','The book has been deleted!');
     }
 
-    public function rentals()
-    {
+    public function rentals(){
         return view('books.rentals');
-
     }
-
 }

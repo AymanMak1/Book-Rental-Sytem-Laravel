@@ -16,6 +16,7 @@ class BookFormRequest extends FormRequest
     {
         return [
             'title'=>'required|max:255', // |unique:books,title
+            'slug' => 'max:510',
             'author'=>'required|max:255',
             'released_at'=>'required|before:now',
             'description'=>'nullable',
