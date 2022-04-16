@@ -14,18 +14,25 @@ class BorrowsController extends Controller
 
     public function index()
     {
-        $myrentals = DB::table('borrows')
-                        ->join('books','borrows.book_id','=','books.id')
-                        ->join('users','borrows.reader_id','=','users.id')
-                        ->where('users.id','=',Auth::id())
-                        ->select('borrows.*', 'books.title','books.author')
-                        ->get();
+        if(Auth::user()->is_librarian == 0){
+            $rentals = DB::table('borrows')
+            ->join('books','borrows.book_id','=','books.id')
+            ->join('users','borrows.reader_id','=','users.id')
+            ->where('users.id','=',Auth::id())
+            ->select('borrows.*', 'books.title','books.author')
+            ->get();
+        } else{
+            $rentals = DB::table('borrows')
+            ->join('books','borrows.book_id','=','books.id')
+            ->join('users','borrows.reader_id','=','users.id')
+            ->select('borrows.*', 'books.title','books.author')
+            ->get();
+        }
         // select borrows.*, books.* from books, borrows where borrows.reader_id = 18 and borrows.book_id = books.id;
-        //$user = Auth::user();
         //$myrentals = $user->readerBorrows;
         //dd($myrentals);
         return view('rentals.index', [
-            'myrentals' => $myrentals
+            'myrentals' => $rentals
         ]);
     }
 
@@ -52,7 +59,6 @@ class BorrowsController extends Controller
         $rentalDetails = DB::table('borrows')
                         ->join('books','borrows.book_id','=','books.id')
                         ->join('users','borrows.reader_id','=','users.id')
-                        ->where('users.id','=',Auth::id())
                         ->where('borrows.id','=', $id)
                         ->select('borrows.*','books.title','books.author','books.released_at',"books.slug")
                         ->get();

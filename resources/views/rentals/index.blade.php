@@ -60,7 +60,7 @@
                     @endforeach
                 @else
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td class="px-6 py-4 text-center " colspan="4">No Book Rental Request with Pending Status</td>
+                        <td class="px-6 py-4 text-center " colspan="5">No Book Rental Request with Pending Status</td>
                     </tr>
                 @endif
             </tbody>

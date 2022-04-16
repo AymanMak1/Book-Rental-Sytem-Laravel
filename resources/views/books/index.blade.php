@@ -59,6 +59,7 @@
                 </div>
             </div>
             @endforeach
+            {{ $books->links('pagination::tailwind') }}
         @else
             No Books Found
         @endif

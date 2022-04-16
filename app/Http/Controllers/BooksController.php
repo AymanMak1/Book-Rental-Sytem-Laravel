@@ -9,6 +9,7 @@ use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\BookFormRequest;
+use Illuminate\Pagination\Paginator;
 
 class BooksController extends Controller
 {
@@ -29,7 +30,7 @@ class BooksController extends Controller
             return view('books.index',compact('books'));
        }
 
-       $books = Book::all()->sortByDesc("id");
+       $books = Book::paginate(8);
        return view('books.index', [
            'books' => $books
        ]);
@@ -72,13 +73,15 @@ class BooksController extends Controller
         return redirect('/books')->with('message','the book has been updated successfully!');
     }
 
-    public function destroy($slug){
+    public function destroy($slug)
+    {
         $book = Book::where('slug',$slug);
         $book->delete();
         return redirect('/books')->with('message','The book has been deleted!');
     }
 
-    public function rentals(){
+    public function rentals()
+    {
         return view('books.rentals');
     }
 }
