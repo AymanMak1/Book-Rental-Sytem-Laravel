@@ -17,9 +17,12 @@ class BorrowsController extends Controller
         $myrentals = DB::table('borrows')
                         ->join('books','borrows.book_id','=','books.id')
                         ->join('users','borrows.reader_id','=','users.id')
-                        ->where('borrows.reader_id','=',Auth::id())
+                        ->where('users.id','=',Auth::id())
+                        ->select('borrows.*', 'books.title','books.author')
                         ->get();
-
+        // select borrows.*, books.* from books, borrows where borrows.reader_id = 18 and borrows.book_id = books.id;
+        //$user = Auth::user();
+        //$myrentals = $user->readerBorrows;
         //dd($myrentals);
         return view('rentals.index', [
             'myrentals' => $myrentals
@@ -46,13 +49,21 @@ class BorrowsController extends Controller
 
     public function show($id)
     {
-        //
+        $rentalDetails = DB::table('borrows')
+                        ->join('books','borrows.book_id','=','books.id')
+                        ->join('users','borrows.reader_id','=','users.id')
+                        ->where('users.id','=',Auth::id())
+                        ->where('borrows.id','=', $id)
+                        ->select('borrows.*','books.title','books.author','books.released_at',"books.slug")
+                        ->get();
+        //dd($rentalDetails);
+        return view('rentals.show',['rental' => $rentalDetails]);
     }
 
 
     public function edit($id)
     {
-        //
+
     }
 
     public function update(Request $request, $id)

@@ -8,6 +8,7 @@ use App\Models\Genre;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\BookFormRequest;
 
 class BooksController extends Controller
 {
@@ -23,7 +24,9 @@ class BooksController extends Controller
        $search =request()->query('search');
 
        if($search){
-            $books = Book::where('title','LIKE','%'.$search.'%')->get();
+            $books = Book::where('title','LIKE','%'.$search.'%')
+            ->orWhere('author','LIKE','%'.$search.'%')
+            ->get();
             return view('books.index',compact('books'));
        }
 
@@ -43,19 +46,9 @@ class BooksController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(BookFormRequest $request)
     {
-        $request->validate([
-            'title'=>'required|max:255|unique:books,title',
-            'author'=>'required|max:255',
-            'released_at'=>'required|before:now',
-            'description'=>'nullable',
-            'cover_image' => 'mimes:jpg,png,jpeg|max:5048',
-            'language_code'=>'nullable',
-            'pages'=>'required|min:0    ',
-            'isbn'=>'required|regex:/^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$/i|unique:books,isbn',
-            'in_stock'=>'required|min:0'
-        ]);
+        $request->validated();
 
         $newImageName = NULL;
         if($request->cover_image != NULL){
@@ -97,18 +90,9 @@ class BooksController extends Controller
     }
 
 
-    public function update(Request $request, $slug)
+    public function update(BookFormRequest $request, $slug)
     {
-        $request->validate([
-            'title'=>'required|max:255',
-            'author'=>'required|max:255',
-            'released_at'=>'required|before:now',
-            'description'=>'nullable',
-            'language_code'=>'nullable',
-            'pages'=>'required|min:0    ',
-            'isbn'=>'required|regex:/^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$/i',
-            'in_stock'=>'required|min:0'
-        ]);
+        $request->validated();
 
         Book::where('slug',$slug)->update([
             'title' => $request->input('title'),

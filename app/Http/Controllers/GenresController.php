@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Genre;
 use Cviebrock\EloquentSluggable\Services\SlugService;
-
+use App\Http\Requests\GenreFormRequest;
 class GenresController extends Controller
 {
 
@@ -24,22 +24,14 @@ class GenresController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(GenreFormRequest $request)
     {
-        $request->validate([
-            'name'=>'required|min:3|max:255',
-            'style'=>'required|max:255',
-        ]);
-
-
-
+        $request->validated();
         Genre::create([
             'name' => $request->input('name'),
             'slug' => SlugService::createSlug(Genre::class,'slug',$request->name),
             'style' => $request->input('style'),
         ]);
-
-
         return redirect('/genres')->with('message','The genre has been added successfully !');
     }
 
@@ -54,22 +46,14 @@ class GenresController extends Controller
         return view('genres.edit')->with('genre',Genre::where('slug',$slug)->first());
     }
 
-    public function update(Request $request, $slug)
+    public function update(GenreFormRequest $request, $slug)
     {
-        $request->validate([
-            'name'=>'required|min:3|max:255',
-            'style'=>'required|max:255',
-        ]);
-
-
-
+        $request->validated();
         Genre::where('slug',$slug)->update([
             'name' => $request->input('name'),
             'slug' => SlugService::createSlug(Genre::class,'slug',$request->name),
             'style' => $request->input('style'),
         ]);
-
-
         return redirect('/genres')->with('message','The genre has been updated successfully !');
     }
 
@@ -77,7 +61,6 @@ class GenresController extends Controller
     {
         $genre = Genre::where('slug',$slug);
         $genre->delete();
-
         return redirect('/genres')->with('message','The genre has been deleted!');
     }
 }

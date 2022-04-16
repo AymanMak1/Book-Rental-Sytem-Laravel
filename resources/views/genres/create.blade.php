@@ -10,6 +10,13 @@
             <div class="px-4 sm:px-0">
               <h3 class="text-lg font-medium leading-6 text-gray-900">Add a Genre</h3>
               <p class="mt-1 text-sm text-gray-600">Use the following form to add a new book genre.</p>
+              @if ($errors->any())
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li class="text-red-700">{{$error}}</li>
+                    @endforeach
+                </ul>
+              @endif
             </div>
           </div>
           <div class="mt-5 md:mt-0 md:col-span-2">
