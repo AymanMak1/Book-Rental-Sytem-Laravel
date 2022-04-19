@@ -30,6 +30,14 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
             'is_librarian'=> true
         ]);
+        DB::table('users')->insert([
+            'name'=> "Testo Testi",
+            'email'=> "testlib@brs.com",
+            'email_verified_at' => now(),
+            'password'=> Hash::make('testlib22@'),
+            'remember_token' => Str::random(10),
+            'is_librarian'=> true
+        ]);
 
         User::factory()->count(15)->create();
     }

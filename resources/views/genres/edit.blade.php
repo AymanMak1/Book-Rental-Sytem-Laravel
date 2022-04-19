@@ -26,15 +26,27 @@
 
                         <div class="col-span-6 sm:col-span-3">
                             <label for="style" class="block text-sm font-medium text-gray-700">Style</label>
-                            <select id="style" name="style" autocomplete="style-name" value="{{$genre->style}}" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                    <option value="bg-sky-500">Blue</option>
-                                    <option value="bg-neutral-500">Light Neutral</option>
-                                    <option value="bg-green-500">Green</option>
-                                    <option value="bg-red-600">Red</option>
-                                    <option value="bg-amber-400">Amber</option>
-                                    <option value="bg-cyan-600">Cyan</option>
-                                    <option value="bg-slate-200">Slate</option>
-                                    <option value="bg-neutral-900">Dark Neutral</option>
+                            <select id="style" name="style" autocomplete="style-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    @php
+                                        $styles = [
+                                            "Blue" => "bg-sky-500",
+                                            "Light Neutral" => "bg-neutral-500",
+                                            "Green" => "bg-green-500",
+                                            "Red" => "bg-red-600",
+                                            "Amber" =>"bg-amber-400",
+                                            "Cyan" => "bg-cyan-600",
+                                            "Slate" => "bg-slate-200",
+                                            "Dark Neutral" => "bg-neutral-900"
+                                        ];
+                                    @endphp
+                                    @foreach ($styles as $key => $style )
+                                    <option value="{{$style}}"
+                                        @if ($style == $genre->style)
+                                        selected="selected"
+                                        @endif>
+                                        {{$key}}
+                                    </option>
+                                    @endforeach
                             </select>
                         </div>
 

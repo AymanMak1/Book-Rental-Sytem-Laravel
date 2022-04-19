@@ -26,7 +26,7 @@ class BooksController extends Controller
        if($search){
             $books = Book::where('title','LIKE','%'.$search.'%')
             ->orWhere('author','LIKE','%'.$search.'%')
-            ->get();
+            ->paginate(8);
             return view('books.index',compact('books'));
        }
 

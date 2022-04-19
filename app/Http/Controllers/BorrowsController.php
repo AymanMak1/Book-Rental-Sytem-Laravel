@@ -8,6 +8,8 @@ use App\Models\Borrow;
 use App\Models\User;
 use App\Models\Book;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\UpdateBorrowLibrarianRequest;
+use App\Http\Requests\UpdateBorrowReaderRequest;
 
 class BorrowsController extends Controller
 {
@@ -21,16 +23,13 @@ class BorrowsController extends Controller
             ->where('users.id','=',Auth::id())
             ->select('borrows.*', 'books.title','books.author')
             ->get();
-        } else{
+        } else {
             $rentals = DB::table('borrows')
             ->join('books','borrows.book_id','=','books.id')
             ->join('users','borrows.reader_id','=','users.id')
             ->select('borrows.*', 'books.title','books.author')
             ->get();
         }
-        // select borrows.*, books.* from books, borrows where borrows.reader_id = 18 and borrows.book_id = books.id;
-        //$myrentals = $user->readerBorrows;
-        //dd($myrentals);
         return view('rentals.index', [
             'myrentals' => $rentals
         ]);
@@ -60,9 +59,10 @@ class BorrowsController extends Controller
                         ->join('books','borrows.book_id','=','books.id')
                         ->join('users','borrows.reader_id','=','users.id')
                         ->where('borrows.id','=', $id)
-                        ->select('borrows.*','books.title','books.author','books.released_at',"books.slug")
+                        ->select('borrows.*','books.title','books.author','books.released_at',"books.slug","users.name")
                         ->get();
-        //dd($rentalDetails);
+        $rentalDetails[0]->request_managed_by_name= User::where('id', '=',$rentalDetails[0]->request_managed_by)->select('name')->get();
+        $rentalDetails[0]->return_managed_by_name= User::where('id', '=',$rentalDetails[0]->return_managed_by)->select('name')->get();
         return view('rentals.show',['rental' => $rentalDetails]);
     }
 
@@ -72,9 +72,23 @@ class BorrowsController extends Controller
 
     }
 
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(UpdateBorrowLibrarianRequest $librarianRequest, UpdateBorrowReaderRequest $readerRequest,  $id){
+        $now = now('Europe/Budapest');
+        if(Auth::user()->is_librarian === 1){
+            $validate_data = $librarianRequest->validated();
+            $validate_data['request_processed_at'] = $now;
+            $validate_data['request_managed_by'] = Auth::id();
+            if($validate_data['status'] == 'RETURNED'){
+                $validate_data['return_managed_by'] = Auth::id();
+            }
+            Borrow::where('id',$id)->update($validate_data);
+        }
+        if(Auth::user()->is_librarian === 0){
+            $validate_data = $readerRequest->validated();
+            Borrow::where('id',$id)->update($validate_data);
+        }
+
+        return redirect('/rentals')->with('message','The request has been submitted successfully');
     }
 
     public function destroy($id)
