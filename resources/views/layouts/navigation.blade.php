@@ -62,7 +62,6 @@
                         @else
                             Rentals
                         @endif
-
                     </a>
                 @endif
 
@@ -106,9 +105,11 @@
 
                         <x-slot name="content">
                             <!-- Authentication -->
+                            <x-dropdown-link href="{{route('profile')}}">
+                                {{"Profile"}}
+                            </x-dropdown-link>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-
                                 <x-dropdown-link :href="route('logout')"
                                         onclick="event.preventDefault();
                                                     this.closest('form').submit();">

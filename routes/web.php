@@ -7,6 +7,7 @@ use App\Http\Controllers\BooksController;
 use App\Http\Controllers\BorrowsController;
 
 Route::get('/', [PagesController::class, 'index'])->name('main');
+Route::get('user/profile', [PagesController::class, 'profile'])->middleware(['auth'])->name('profile');
 Route::resource('/rentals',BorrowsController::class);
 Route::resource('/books',BooksController::class);
 Route::resource('/genres',GenresController::class);

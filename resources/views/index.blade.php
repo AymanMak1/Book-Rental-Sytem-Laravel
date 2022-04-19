@@ -79,7 +79,7 @@
 
                 <div id="jh-stats-neutral" class="flex flex-col justify-center px-4 py-4 mt-4 bg-white rounded sm:mt-0 drop-shadow-lg">
                     <div>
-                        <p class="text-3xl font-semibold text-center text-gray-800">192</p>
+                        <p class="text-3xl font-semibold text-center text-gray-800">{{count($rentals)}}</p>
                         <p class="text-lg text-center text-gray-500">Active Rental Books</p>
                     </div>
                 </div>
